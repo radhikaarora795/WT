@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background-color: #f0f2f5;
+        padding-top: 50px;
+        color: #333;
+    }
+
+    #userForm {
+        background: #ffffff;
+        width: 350px;
+        margin: 0 auto; /* Centers the form horizontally */
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* Labels as blocks so inputs sit underneath them */
+    label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    input[type="text"], 
+    input[type="password"], 
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-sizing: border-box; /* Keeps padding from breaking the width */
+    }
+
+    input[type="radio"] {
+        margin-right: 5px;
+        margin-bottom: 15px;
+    }
+
+    button {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    button:hover {
+        background-color: #1d4ed8;
+    }
+
+    #output {
+        display: block;
+        margin: 20px auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fafafa;
+        font-family: 'Courier New', monospace;
+    }
+</style>
+    </head>
+    <body>
+        <form id="userForm">
+            Name:<input type="text" id="name"><br><br>
+            Email:<input type="text" id="email"><br><br>
+            Gender:
+            <input type="radio" name="gender" value="Male">Male
+            <input type="radio" name="gender" value="Female">Female
+            <br><br>
+            Department:
+            <select id="department">
+                <option value="">Select</option>
+                <option value="CSE">CSE</option>
+                <option value="IT">IT</option>
+                <option value="ECE">ECE</option>
+            </select>
+            Password: <input type="password" id="password"><br><br>
+            <br><br>
+            <button type="button" onclick="showData()">Submit</button>
+        </form>
+        <br>
+        <textarea id="output" rows="6" cols="40"></textarea>
+    </body>
+    <script>
+        function showData(){
+            let name=document.getElementById("name").value
+            let email=document.getElementById("email").value
+            let password=document.getElementById("password").value
+            let dept=document.getElementById("department").value
+            let genderNodes=document.getElementsByName("gender")
+            let gender = "";
+
+            for (let i = 0; i < genderNodes.length; i++) {
+                if (genderNodes[i].checked) {
+                    gender = genderNodes[i].value;
+                }
+            }
+
+            if (name === "" || email === "" || password === "" || dept === "" || gender === "") {
+                alert("All fields are required!");
+                return;
+            }
+
+            if(email.indexOf("@")===-1 || email.indexOf(".")===-1){
+                alert("not valid")
+                return;
+            }
+
+            let result =
+            "Name: " + name + "\n" +
+            "Email: " + email + "\n" +
+            "Gender: " + gender + "\n" +
+            "Department: " + dept + "\n" +
+            "Password: " + password;
+
+            document.getElementById("output").value = result;
+        }
+    </script>
+</html>
